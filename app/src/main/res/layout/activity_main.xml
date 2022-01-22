@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain">
+
+    <Button
+        android:id="@+id/bSettingNotify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Уведомления"
+        app:layout_constraintEnd_toEndOf="@+id/bRemove"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/bRemove"
+        app:layout_constraintTop_toBottomOf="@+id/bRemove" />
+
+    <ImageButton
+        android:id="@+id/bAdd"
+        android:layout_width="108dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="183dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pbWater"
+        app:srcCompat="?android:attr/textSelectHandle"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ProgressBar
+        android:id="@+id/pbWater"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:indeterminate="false"
+        android:indeterminateTint="#A13F3F"
+        android:progressTint="#2CD8D8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvProgress"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/pbWater"
+        app:layout_constraintEnd_toEndOf="@+id/pbWater"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pbWater"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <ImageButton
+        android:id="@+id/bRemove"
+        android:layout_width="63dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="133dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bAdd"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/bSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Настройки"
+        app:layout_constraintEnd_toEndOf="@+id/bRemove"
+        app:layout_constraintStart_toStartOf="@+id/bRemove"
+        app:layout_constraintTop_toBottomOf="@+id/bRemove" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="414dp"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

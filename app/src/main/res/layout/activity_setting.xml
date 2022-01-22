@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <EditText
+        android:id="@+id/etnWeight"
+        android:layout_width="114dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="84dp"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="3"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:text="70"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvWeight"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="@+id/tvWeight"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeight" />
+
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="330dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="30dp"
+        android:text="Ваш вес"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/rgActivity"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="@+id/rgActivity"
+        app:layout_constraintTop_toBottomOf="@+id/rgActivity" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:text="Укажите параметры"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:text="Укажите пол"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Выберите активность"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etnAge"
+        app:layout_constraintStart_toStartOf="@+id/etnAge"
+        app:layout_constraintTop_toBottomOf="@+id/etnAge" />
+
+    <EditText
+        android:id="@+id/etnAge"
+        android:layout_width="114dp"
+        android:layout_height="59dp"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="2"
+        android:numeric="integer"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:text="25"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvAge"
+        app:layout_constraintStart_toStartOf="@+id/tvAge"
+        app:layout_constraintTop_toBottomOf="@+id/tvAge" />
+
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/tvGender"
+        app:layout_constraintStart_toStartOf="@+id/tvGender"
+        app:layout_constraintTop_toBottomOf="@+id/tvGender">
+
+        <RadioButton
+            android:id="@+id/rbMen"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Мужской"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/rbWomen"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Женский" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rgActivity"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/tvActivity"
+        app:layout_constraintStart_toStartOf="@+id/tvActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvActivity">
+
+        <RadioButton
+            android:id="@+id/rbLow"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Низкая" />
+
+        <RadioButton
+            android:id="@+id/rbMiddle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Средняя" />
+
+        <RadioButton
+            android:id="@+id/rbHigh"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Высокая" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/bNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Сохранить"
+        app:layout_constraintEnd_toEndOf="@+id/etnWeight"
+        app:layout_constraintStart_toStartOf="@+id/etnWeight"
+        app:layout_constraintTop_toBottomOf="@+id/etnWeight" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/rgGender"
+        app:layout_constraintStart_toStartOf="@+id/rgGender"
+        app:layout_constraintTop_toBottomOf="@+id/rgGender" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvActivity"
+        app:layout_constraintEnd_toEndOf="@+id/etnAge"
+        app:layout_constraintStart_toStartOf="@+id/etnAge"
+        app:layout_constraintTop_toBottomOf="@+id/etnAge" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvWeight"
+        app:layout_constraintEnd_toEndOf="@+id/rgActivity"
+        app:layout_constraintStart_toStartOf="@+id/rgActivity"
+        app:layout_constraintTop_toBottomOf="@+id/rgActivity"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvGender"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/bNext"
+        app:layout_constraintEnd_toEndOf="@+id/etnWeight"
+        app:layout_constraintStart_toStartOf="@+id/etnWeight"
+        app:layout_constraintTop_toBottomOf="@+id/etnWeight" />
+
+    <TextView
+        android:id="@+id/tvAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Укажите возраст"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/rgGender"
+        app:layout_constraintStart_toStartOf="@+id/rgGender"
+        app:layout_constraintTop_toBottomOf="@+id/rgGender" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
