@@ -6,14 +6,15 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.trackwater.databinding.ActivityMainBinding
-import com.example.trackwater.databinding.ActivitySettingBinding
-import com.example.trackwater.databinding.ActivitySettingNotifyBinding
+import com.example.trackwater.presentation.MainViewModel
+import com.example.trackwater.presentation.SettingNotifyActivity
 import android.os.Build as Build
 
 class ActivityMain : AppCompatActivity() {
@@ -28,10 +29,18 @@ class ActivityMain : AppCompatActivity() {
     val NOTIFICATION_ID = 0
     var vibrate = longArrayOf(1000, 1000, 1000, 1000, 1000)
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bc = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bc.root)
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.waterNormals.observe(this){
+            Log.d("MainViewTest", it.toString())
+        }
+        viewModel.getWaterNorma()
 
         pref = getSharedPreferences("UserData", MODE_PRIVATE)
         check = pref?.getBoolean("Check", false)!!
@@ -52,6 +61,9 @@ class ActivityMain : AppCompatActivity() {
         bc.tvProgress.text = "$prog/$norma"
 
         bc.bAdd.setOnClickListener {
+
+            viewModel.changeDrinkWaterNorma(viewModel.waterNormals.value!!, 200)
+
             prog += 200
             bc.pbWater.progress = prog
 
@@ -63,6 +75,7 @@ class ActivityMain : AppCompatActivity() {
         }
 
         bc.bRemove.setOnClickListener {
+            viewModel.changeDrinkWaterNorma(viewModel.waterNormals.value!!, -200)
             pref = getSharedPreferences("UserData", MODE_PRIVATE)
 
             prog -= 200
