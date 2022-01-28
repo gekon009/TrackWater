@@ -11,23 +11,18 @@ class MainViewModel : ViewModel() {
     private val repositorySetting = SettingRepositoryImpl
 
     private val getWaterNormaUseCase = GetWaterNormaUseCase(repositoryWaterNorma)
-    private val editWaterNormaUseCase = EditWaterNormaUseCase(repositoryWaterNorma)
     private val initWaterNormaUseCase = InitWaterNormaUseCase(repositoryWaterNorma)
-    private val addWaterNormaUseCase = AddWaterNormaUseCase(repositoryWaterNorma)
-    private val addSettingUseCase = AddSettingUseCase(repositorySetting)
-    private val editSettingUseCase = EditSettingUseCase(repositorySetting)
+    private val drinkWaterNormaUseCase = DrinkWaterNormaUseCase(repositoryWaterNorma)
+    private val initSettingUseCase = InitSettingUseCase(repositorySetting)
     private val getSettingUseCase = GetSettingUseCase(repositorySetting)
 
-    val waterNormals = MutableLiveData<WaterNorma>()
+    val waterNormals = getWaterNormaUseCase.getWaterNorma()
+    val settings = getSettingUseCase.getSetting()
 
-    fun getWaterNorma(waterNormaId: Int = -1){
-        waterNormals.value = getWaterNormaUseCase.getWaterNorma(waterNormaId)
+    fun drinkWaterNorma(waterNorma: WaterNorma, drinking: Int) {
+        drinkWaterNormaUseCase.drinkWaterNorma(waterNorma, drinking)
     }
 
-    fun changeDrinkWaterNorma(waterNorma: WaterNorma, drinking: Int) {
-        addWaterNormaUseCase.addWaterNorma(waterNorma, drinking)
-        getWaterNorma()
-    }
 
 
 }

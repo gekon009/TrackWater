@@ -9,32 +9,30 @@ import java.lang.RuntimeException
 
 object WaterNormaRepositoryImpl: WaterNormaRepository {
 
-    private val waterNormas = mutableListOf<WaterNorma>()
+    private var waterNormasLD = MutableLiveData<WaterNorma>()
+    private lateinit var waterNormas : WaterNorma
 
     init {
         val water = WaterNorma(2890, 200)
-        waterNormas.add(water)
-    }
-
-    override fun getWaterNorma(waterNormaID: Int): WaterNorma {
-        return waterNormas.find {
-            it.id == waterNormaID
-        } ?: throw RuntimeException("Setting $waterNormaID not found")
+        initWaterNorma(water)
     }
 
     override fun initWaterNorma(waterNorma: WaterNorma) {
-        waterNormas.add(waterNorma)
+        waterNormas = WaterNorma(waterNorma.norma, waterNorma.drink)
+        updateWaterNorma()
     }
 
-    override fun editWaterNorma(waterNorma: WaterNorma) {
-        val oldWaterNorma = getWaterNorma(waterNorma.id)
-        waterNormas.remove(oldWaterNorma)
-        initWaterNorma(waterNorma)
+    override fun getWaterNorma(): LiveData<WaterNorma> {
+        return waterNormasLD
     }
 
-    override fun addWaterNorma(waterNorma: WaterNorma, drinking: Int) {
+    override fun drinkWaterNorma(waterNorma: WaterNorma, drinking: Int) {
         var drink = waterNorma.copy(drink = waterNorma.drink + drinking)
-        editWaterNorma(waterNorma)
+        initWaterNorma(drink)
+    }
+
+    private fun updateWaterNorma(){
+        waterNormasLD.value = waterNormas.copy()
     }
 
 }

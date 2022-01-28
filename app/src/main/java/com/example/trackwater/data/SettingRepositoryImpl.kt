@@ -1,32 +1,30 @@
 package com.example.trackwater.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.trackwater.domain.Setting
 import com.example.trackwater.domain.SettingRepository
-import java.lang.RuntimeException
 
 object SettingRepositoryImpl: SettingRepository {
 
-    private val settings = mutableListOf<Setting>()
+    private lateinit var settings : Setting
+    private var settingsLD = MutableLiveData<Setting>()
 
     init {
         val set = Setting(2, 1, 28, 82)
-        addSetting(set)
+        initSetting(set)
     }
 
-    override fun getSetting(settingID: Int): Setting {
-        return settings.find {
-            it.id == settingID
-        } ?: throw RuntimeException("Setting $settingID not found")
+    override fun initSetting(setting: Setting) {
+        settings = Setting(setting.activity, setting.gender, setting.age, setting.weight)
+        updateSetting()
     }
 
-    override fun addSetting(setting: Setting) {
-        settings.add(setting)
+    override fun getSetting(): LiveData<Setting> {
+        return settingsLD
     }
 
-    override fun editSetting(setting: Setting) {
-        val oldSetting = getSetting(setting.id)
-        settings.remove(oldSetting)
-        addSetting(setting)
+    private fun updateSetting() {
+        settingsLD.value = settings.copy()
     }
-
 }

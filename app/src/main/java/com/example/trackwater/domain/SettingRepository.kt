@@ -1,12 +1,11 @@
 package com.example.trackwater.domain
 
+import androidx.lifecycle.LiveData
+
 interface SettingRepository {
 
-    fun getSetting(settingID: Int): Setting
+    fun getSetting(): LiveData<Setting>
 
-    fun addSetting(setting: Setting)
-
-    fun editSetting(setting: Setting)
-
+    fun initSetting(setting: Setting)
 
 }

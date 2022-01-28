@@ -38,9 +38,14 @@ class ActivityMain : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.waterNormals.observe(this){
+            Log.d("MainViewTest", "waterNorma")
             Log.d("MainViewTest", it.toString())
         }
-        viewModel.getWaterNorma()
+
+        viewModel.settings.observe(this){
+            Log.d("MainViewTest", "settings")
+            Log.d("MainViewTest", it.toString())
+        }
 
         pref = getSharedPreferences("UserData", MODE_PRIVATE)
         check = pref?.getBoolean("Check", false)!!
@@ -62,7 +67,7 @@ class ActivityMain : AppCompatActivity() {
 
         bc.bAdd.setOnClickListener {
 
-            viewModel.changeDrinkWaterNorma(viewModel.waterNormals.value!!, 200)
+            viewModel.drinkWaterNorma(viewModel.waterNormals.value!!, 200)
 
             prog += 200
             bc.pbWater.progress = prog
@@ -75,7 +80,7 @@ class ActivityMain : AppCompatActivity() {
         }
 
         bc.bRemove.setOnClickListener {
-            viewModel.changeDrinkWaterNorma(viewModel.waterNormals.value!!, -200)
+            viewModel.drinkWaterNorma(viewModel.waterNormals.value!!, -200)
             pref = getSharedPreferences("UserData", MODE_PRIVATE)
 
             prog -= 200

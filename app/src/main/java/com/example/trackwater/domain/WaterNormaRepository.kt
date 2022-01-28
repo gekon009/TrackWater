@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 
 interface WaterNormaRepository {
 
-    fun getWaterNorma(waterNormaID: Int): WaterNorma
+    fun getWaterNorma(): LiveData<WaterNorma>
 
     fun initWaterNorma(waterNorma: WaterNorma)
 
-    fun editWaterNorma(waterNorma: WaterNorma)
-
-    fun addWaterNorma(waterNorma: WaterNorma, drinking: Int)
+    fun drinkWaterNorma(waterNorma: WaterNorma, drinking: Int)
 }
