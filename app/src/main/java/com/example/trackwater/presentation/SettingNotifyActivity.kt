@@ -1,4 +1,4 @@
-package com.example.trackwater
+package com.example.trackwater.presentation
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
-import android.widget.Toast
+import com.example.trackwater.AlarmReceiver
 import com.example.trackwater.databinding.ActivitySettingNotifyBinding
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class SettingNotifyActivity : AppCompatActivity() {
     lateinit var bc : ActivitySettingNotifyBinding
