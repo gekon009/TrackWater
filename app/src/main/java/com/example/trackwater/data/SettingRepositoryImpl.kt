@@ -20,8 +20,8 @@ object SettingRepositoryImpl: SettingRepository {
         updateSetting()
     }
 
-    override fun getSetting(): LiveData<Setting> {
-        return settingsLD
+    override fun getSetting(): Setting {
+        return settings
     }
 
     private fun updateSetting() {

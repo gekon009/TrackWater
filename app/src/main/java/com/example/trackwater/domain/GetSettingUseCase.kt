@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class GetSettingUseCase (private val settingRepository: SettingRepository) {
 
-    fun getSetting(): LiveData<Setting>{
+    fun getSetting(): Setting{
         return settingRepository.getSetting()
     }
 }

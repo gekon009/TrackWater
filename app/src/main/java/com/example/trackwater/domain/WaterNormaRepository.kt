@@ -1,10 +1,8 @@
 package com.example.trackwater.domain
 
-import androidx.lifecycle.LiveData
-
 interface WaterNormaRepository {
 
-    fun getWaterNorma(): LiveData<WaterNorma>
+    fun getWaterNorma(): WaterNorma
 
     fun initWaterNorma(waterNorma: WaterNorma)
 

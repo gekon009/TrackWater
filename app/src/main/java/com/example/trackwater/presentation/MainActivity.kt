@@ -1,147 +1,62 @@
-package com.example.trackwater
+package com.example.trackwater.presentation
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.TaskStackBuilder
-import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.trackwater.SettingActivity
 import com.example.trackwater.databinding.ActivityMainBinding
-import com.example.trackwater.presentation.MainViewModel
-import com.example.trackwater.presentation.SettingNotifyActivity
-import android.os.Build as Build
 
 class ActivityMain : AppCompatActivity() {
-    lateinit var bc : ActivityMainBinding
-    var pref : SharedPreferences? = null
-    var norma = 0
-    var prog = 0
+    lateinit var bc: ActivityMainBinding
     var check = false
 
-    val CHANNEL_ID = "channelName"
-    val CHANNEL_NAME = "channelID"
-    val NOTIFICATION_ID = 0
-    var vibrate = longArrayOf(1000, 1000, 1000, 1000, 1000)
+    private lateinit var vM: MainViewModel
 
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bc = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bc.root)
+        vM = ViewModelProvider(this)[MainViewModel::class.java]
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.waterNormals.observe(this){
-            Log.d("MainViewTest", "waterNorma")
-            Log.d("MainViewTest", it.toString())
+        check = true
+        if (!check) {
+            val intent = SettingActivity.newIntentAdd(this)
+            startActivity(intent)
         }
 
-        viewModel.settings.observe(this){
-            Log.d("MainViewTest", "settings")
-            Log.d("MainViewTest", it.toString())
+        vM.getWaterNorma()
+        vM.waterNorma.observe(this){
+            val drink = it.drink
+            val norma = it.norma
+            bc.tvProgress.text = "$drink / $norma"
+            bc.pbWater.max = norma
+            bc.pbWater.progress = drink
         }
 
-        pref = getSharedPreferences("UserData", MODE_PRIVATE)
-        check = pref?.getBoolean("Check", false)!!
-
-        if(!check){
-            val stage2 = Intent(this, SettingActivity::class.java)
-            startActivity(stage2)
-        }
-
-        val editor = pref?.edit()
-
-        norma = pref?.getInt("Norma", 0)!!
-        prog = pref?.getInt("Progress", 0)!!
-
-        bc.pbWater.max = norma
-        bc.pbWater.progress = prog
-
-        bc.tvProgress.text = "$prog/$norma"
 
         bc.bAdd.setOnClickListener {
-
-            viewModel.drinkWaterNorma(viewModel.waterNormals.value!!, 200)
-
-            prog += 200
-            bc.pbWater.progress = prog
-
-            bc.tvProgress.text = "$prog/$norma"
-
-            editor?.remove("Progress")
-            editor?.putInt("Progress", prog)
-            editor?.apply()
+            val drink = 200
+            vM.drinkWaterNorma(drink)
         }
 
         bc.bRemove.setOnClickListener {
-            viewModel.drinkWaterNorma(viewModel.waterNormals.value!!, -200)
-            pref = getSharedPreferences("UserData", MODE_PRIVATE)
-
-            prog -= 200
-            bc.pbWater.progress = prog
-
-            bc.tvProgress.text = "$prog/$norma"
-
-            editor?.remove("Progress")
-            editor?.putInt("Progress", prog)
-            editor?.apply()
+            val drink = -200
+            vM.drinkWaterNorma(drink)
         }
 
-        createNotificationChannel()
-
-        val intent = Intent(this, ActivityMain::class.java)
-        val pendingIntent = TaskStackBuilder.create(this).run{
-            addNextIntentWithParentStack(intent)
-            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-        }
-
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Title Notification")
-            .setContentText("This notification text")
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)
-            .setVibrate(vibrate)
-            .build()
-
-        val notificationManager = NotificationManagerCompat.from(this)
 
         bc.bSetting.setOnClickListener {
-            val setting = Intent(this, SettingActivity::class.java)
-            startActivity(setting)
+            val intent = SettingActivity.newIntentEdit(this)
+            startActivity(intent)
         }
 
         bc.bSettingNotify.setOnClickListener {
-            val s = Intent(this, SettingNotifyActivity::class.java)
-            startActivity(s)
+            val intent = SettingActivity.newIntentAdd(this)
+            startActivity(intent)
         }
 
 
-
-    }
-
-    private fun createNotificationChannel() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-
-            val name : CharSequence = "WaterDrinkReminderChannel"
-            val description = "Канал для отправки напомнинаний выпить воду"
-            val impotance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel("AlarmWater", name, impotance)
-            channel.description = description
-            val notificationManager = getSystemService(
-                NotificationManager::class.java
-            )
-
-            notificationManager.createNotificationChannel(channel)
-
-        }
     }
 
 }

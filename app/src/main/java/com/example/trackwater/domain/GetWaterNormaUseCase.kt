@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class GetWaterNormaUseCase(private val waterNormaRepository: WaterNormaRepository) {
 
-    fun getWaterNorma(): LiveData<WaterNorma> {
+    fun getWaterNorma(): WaterNorma {
         return waterNormaRepository.getWaterNorma()
     }
 }

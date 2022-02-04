@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Track Water</string>
+    <string name="error_input_activity">Track Water</string>
+    <string name="error_input_age">Возраст некорректный</string>
+    <string name="error_input_weight">Track Water</string>
+    <string name="error_input_gender">Track Water</string>
 </resources>

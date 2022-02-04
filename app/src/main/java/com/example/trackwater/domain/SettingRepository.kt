@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 interface SettingRepository {
 
-    fun getSetting(): LiveData<Setting>
+    fun getSetting(): Setting
 
     fun initSetting(setting: Setting)
 

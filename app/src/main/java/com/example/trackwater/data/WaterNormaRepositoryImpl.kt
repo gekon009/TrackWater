@@ -1,5 +1,6 @@
 package com.example.trackwater.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.trackwater.domain.Setting
@@ -22,13 +23,14 @@ object WaterNormaRepositoryImpl: WaterNormaRepository {
         updateWaterNorma()
     }
 
-    override fun getWaterNorma(): LiveData<WaterNorma> {
-        return waterNormasLD
+    override fun getWaterNorma(): WaterNorma {
+        return waterNormas
     }
 
     override fun drinkWaterNorma(waterNorma: WaterNorma, drinking: Int) {
         var drink = waterNorma.copy(drink = waterNorma.drink + drinking)
         initWaterNorma(drink)
+
     }
 
     private fun updateWaterNorma(){
